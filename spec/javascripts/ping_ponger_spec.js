@@ -1,11 +1,11 @@
 describe('ping ponger', function() {
+  var container;
   beforeEach(function() {
-    var container = document.querySelector("#jasmine_content");
+     container = document.querySelector("#jasmine_content");
     init(container);
   });
 
   afterEach(function() {
-    var container = document.querySelector("#jasmine_content");
     container.innerHTML = "";
   });
 
@@ -30,5 +30,32 @@ describe('ping ponger', function() {
     buttonNode2.click();
 
     expect(scoreNode2.innerText).toEqual('1');
-  })
-});
+  });
+
+  it('player is notified they won when they reach a score of 21', function(){
+    var score = document.querySelector('#score2');
+    var button = document.querySelector('#player2');
+
+    for (var i=0; i < 21; i++){
+      button.click();
+    };
+
+    var h1Node = document.querySelector('h1');
+
+    expect(score.innerText).toEqual('21');
+    expect(h1Node.innerText).toEqual("Player 2 wins!");
+ });
+
+  it('button restarts game and resets score to zero', function(){
+    var button = document.querySelector('#restart');
+    var score1 = document.querySelector('#score1');
+    var score2 = document.querySelector('#score2');
+
+    button.click();
+
+    expect(score1.innerText).toEqual('0');
+    expect(score2.innerText).toEqual('0');
+
+  });
+
+ });
